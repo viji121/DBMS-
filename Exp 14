@@ -1,0 +1,40 @@
+mysql> select * from std;
+
++------+------------+-----------+------+-----------+-----------+
+| ID   | first_name | last_name | age  | subject   | games     |
++------+------------+-----------+------+-----------+-----------+
+|    1 | rahul      | sharma    |   12 | maths     | football  |
+|   34 | anjali     | bhagwat   |   14 | science   | cricket   |
+|  104 | stephen    | fleming   |    9 | maths     | badminton |
+|   99 | priya      | chandra   |   15 | economics | chess     |
+|   50 | shekar     | gowda     |   18 | maths     | badminton |
++------+------------+-----------+------+-----------+-----------+
+5 rows in set (0.05 sec)
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE student ()
+    -> BEGIN
+    -> SELECT ID, first_name
+    -> FROM std
+    -> WHERE subject = 'maths';
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+mysql> DELIMITER ;
+mysql> CALL student ();
++------+------------+
+| ID   | first_name |
++------+------------+
+|    1 | rahul      |
+|  104 | stephen    |
+|   50 | shekar     |
++------+------------+
+3 rows in set (0.08 sec)
+Query OK, 0 rows affected (0.09 sec)
+mysql> SELECT * FROM std WHERE subject = 'maths';
++------+------------+-----------+------+---------+-----------+
+| ID   | first_name | last_name | age  | subject | games     |
++------+------------+-----------+------+---------+-----------+
+|    1 | rahul      | sharma    |   12 | maths   | football  |
+|  104 | stephen    | fleming   |    9 | maths   | badminton |
+|   50 | shekar     | gowda     |   18 | maths   | badminton |
++------+------------+-----------+------+---------+-----------+
+3 rows in set (0.00 sec) 
